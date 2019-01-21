@@ -1,0 +1,18 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.dbryuzgin.myapplication.StatisticsTabbed">
+
+    <item
+        android:id="@+id/topSaledProducts"
+        android:orderInCategory="100"
+        android:title="Популярные товары"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/lowCountProducts"
+        android:orderInCategory="100"
+        android:title="Товары в дефиците"
+        app:showAsAction="never" />
+
+</menu>

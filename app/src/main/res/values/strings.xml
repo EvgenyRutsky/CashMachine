@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Cash Machine</string>
+    <string name="title_activity_main">Cash Machine</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Cash Machine</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="barcode_image">barcode image</string>
+    <string name="cameraButton">Сканировать код</string>
+    <string name="welcomeText">Добро пожаловать в приложение Cash Machine. Для начала работы выберите опцию Сканнер из боковой панели меню.</string>
+    <string name="title_activity_operations_tabbed">OperationsTabbed</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
+    <string name="tab_text_3">Tab 3</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="title_activity_statistics_tabbed">StatisticsTabbed</string>
+</resources>
