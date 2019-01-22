@@ -1,8 +1,6 @@
 package com.example.dbryuzgin.myapplication;
 
-import android.app.AlertDialog;
 import android.content.Intent;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -11,15 +9,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.text.DecimalFormat;
-
-import dmax.dialog.SpotsDialog;
 
 public class Cart extends AppCompatActivity {
 
@@ -30,8 +23,6 @@ public class Cart extends AppCompatActivity {
     TextView row1, row2, row3, row4, row5, toPay2;
     Button goToScan, pay;
     EditText money;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,8 +47,6 @@ public class Cart extends AppCompatActivity {
         final String cartTotal = new DecimalFormat("#0.00").format(Product.total);
 
         toPay2.setText(cartTotal);
-
-
 
         goToScan.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,9 +76,7 @@ public class Cart extends AppCompatActivity {
 
                     } else {
 
-
                         Scan.decreaseCount(Scan.items, FirebaseDatabase.getInstance().getReference().child("Storage"));
-
 
                         enteredMoney = money.getText().toString();
                         double tmp = Double.parseDouble(money.getText().toString()) - Double.parseDouble(cartTotal);
@@ -97,10 +84,7 @@ public class Cart extends AppCompatActivity {
                         startActivity(new Intent(Cart.this, successOrder.class));
                     }
                 }
-
             }
         });
-
     }
-
 }

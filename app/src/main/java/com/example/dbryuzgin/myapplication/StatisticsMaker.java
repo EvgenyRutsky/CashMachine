@@ -1,6 +1,8 @@
 package com.example.dbryuzgin.myapplication;
 
+import android.content.DialogInterface;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -68,69 +70,84 @@ public class StatisticsMaker {
         });
     }
 
-//    public static void getLowCountProducts(){
-//
-//        storageRef = FirebaseDatabase.getInstance().getReference().child("Storage");
-//
-//        storageRef.addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//
-//
-//                String ids = new String();
-//                if(dataSnapshot.exists()){
-//
-//                    for (DataSnapshot childDataSnapshot : dataSnapshot.getChildren()){
-//                        Storage storage = new Storage(childDataSnapshot.child("count").getValue().toString(), childDataSnapshot.child("product_id").getValue().toString());
-//
-//                        if(Integer.parseInt(storage.getCount()) <= 10){
-//                            ids = ids + storage.getCount().toString() + " ";
-//                        }
-//                    }
-//                }
-//
-//                String[] product_ids = ids.split(" ");
-//                getLowCountProductsHandler(product_ids);
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//            }
-//        });
-//    }
+    public static void getLowCountProducts(final TextView[] productsViews, final TextView[] countViews, final AlertDialog.Builder builder){
 
-//    public static void getLowCountProductsHandler (String[] ids){
-//
-//        productsRef = FirebaseDatabase.getInstance().getReference().child("Products");
-//        final String[] productNames = new String[ids.length];
-//
-//        for (int i = 0; i < ids.length; i++){
-//
-//            final int finalI = i;
-//            productsRef.orderByChild("id").equalTo(ids[i]).addListenerForSingleValueEvent(new ValueEventListener() {
-//                @Override
-//                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//
-//                    if(dataSnapshot.exists()){
-//
-//                        for (DataSnapshot childDataSnapshot : dataSnapshot.getChildren()){
-//                            Product product = new Product(childDataSnapshot.child("name").getValue().toString(), childDataSnapshot.child("price").getValue().toString(), childDataSnapshot.child("provider_id").getValue().toString(), childDataSnapshot.child("id").getValue().toString());
-//                            productNames[finalI] = product.getName().toString();
-//
-//                        }
-//                    }
-//
-//                }
-//
-//
-//                @Override
-//                public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//                }
-//            });
-//
-//        }
-//    }
+        storageRef = FirebaseDatabase.getInstance().getReference().child("Storage");
 
+        storageRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                String ids = new String();
+                String counts = new String();
+                if(dataSnapshot.exists()){
+
+                    for (DataSnapshot childDataSnapshot : dataSnapshot.getChildren()){
+                        Storage storage = new Storage(childDataSnapshot.child("count").getValue().toString(), childDataSnapshot.child("product_id").getValue().toString());
+
+                        if(Integer.parseInt(storage.getCount()) <= 10){
+                            counts = counts + storage.getCount().toString() + " ";
+                            ids = ids + storage.getProduct_id().toString() + " ";
+                        }
+                    }
+                }
+
+                if (ids.equals("")){
+                    builder.setTitle("Информация")
+                            .setMessage("В данный момент на складе нет товаров в дефиците")
+                            .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            })
+                            .show();
+                } else {
+
+                    String[] product_counts = counts.split(" ");
+                    String[] product_ids = ids.split(" ");
+
+                    getLowCountProductsHandler(product_ids, productsViews);
+
+                    for (int i = 0; i < product_counts.length; i++) {
+
+                        countViews[i].setText(product_counts[i]);
+
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    public static void getLowCountProductsHandler (String[] ids, final TextView[] productsViews){
+
+        productsRef = FirebaseDatabase.getInstance().getReference().child("Products");
+
+        for (int i = 0; i < ids.length; i++){
+
+            final int finalI = i;
+            productsRef.orderByChild("id").equalTo(ids[i]).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                    if(dataSnapshot.exists()){
+
+                        for (DataSnapshot childDataSnapshot : dataSnapshot.getChildren()){
+                            Product product = new Product(childDataSnapshot.child("name").getValue().toString(), childDataSnapshot.child("price").getValue().toString(), childDataSnapshot.child("provider_id").getValue().toString(), childDataSnapshot.child("id").getValue().toString());
+                            productsViews[finalI].setText(product.getName().toString());
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+        }
+    }
 }

@@ -1,16 +1,16 @@
 package com.example.dbryuzgin.myapplication;
 
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.TextView;
 
 public class LowCountProductsActivity extends AppCompatActivity {
 
     TextView name1, name2, name3, name4, name5, name6, name7;
     TextView count1, count2, count3, count4, count5, count6, count7;
+    AlertDialog.Builder builder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,5 +43,8 @@ public class LowCountProductsActivity extends AppCompatActivity {
                 count7 = (TextView) findViewById(R.id.count7)
         };
 
+        builder = new AlertDialog.Builder(LowCountProductsActivity.this);
+
+        StatisticsMaker.getLowCountProducts(names, counts, builder);
     }
 }
