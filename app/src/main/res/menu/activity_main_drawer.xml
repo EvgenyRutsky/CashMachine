@@ -3,20 +3,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <group android:checkableBehavior="single">
+    <group android:checkableBehavior="single"
+        android:id="@+id/group1">
+
         <item
             android:id="@+id/nav_scanner"
-            android:title="Сканнер" />
+            android:title="Сканер"
+            android:icon="@drawable/qr_code_icon"/>
         <item
             android:id="@+id/nav_operations"
-            android:title="Операции" />
+            android:title="Операции"
+            android:icon="@drawable/operations_icon"/>
         <item
             android:id="@+id/nav_statistics"
-            android:title="Статистика" />
+            android:title="Статистика"
+            android:icon="@drawable/stats_icon"/>
+
     </group>
+
+
 
     <item
         android:id="@+id/nav_logout"
-        android:title="Выйти из системы" />
+        android:title="Выйти из системы"
+        android:icon="@drawable/logout_icon"/>
 
 </menu>

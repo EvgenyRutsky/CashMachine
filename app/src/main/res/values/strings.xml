@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Cash Machine</string>
-    <string name="title_activity_main">Cash Machine</string>
+    <string name="title_activity_main">Главное меню</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Cash Machine</string>
@@ -10,10 +10,15 @@
     <string name="barcode_image">barcode image</string>
     <string name="cameraButton">Сканировать код</string>
     <string name="welcomeText">Добро пожаловать в приложение Cash Machine. Для начала работы выберите опцию Сканнер из боковой панели меню.</string>
-    <string name="title_activity_operations_tabbed">OperationsTabbed</string>
-    <string name="tab_text_1">Tab 1</string>
-    <string name="tab_text_2">Tab 2</string>
-    <string name="tab_text_3">Tab 3</string>
-    <string name="section_format">Hello World from section: %1$d</string>
-    <string name="title_activity_statistics_tabbed">StatisticsTabbed</string>
+    <string name="title_activity_statistics_tabbed">Статистика</string>
+    <string name="title_activity_register">Регистрация</string>
+    <string name="title_activity_scan">Сканирование кода</string>
+    <string name="title_activity_cart">Корзина</string>
+    <string name="title_activity_success_order">Завершение операции</string>
+    <string name="title_activity_email_sender">Отправка чека</string>
+    <string name="title_activity_operations">Операции с товарами</string>
+    <string name="title_activity_product_adding">Добавление товаров</string>
+    <string name="title_activity_product_redactor">Редактирование товаров</string>
+    <!--<string name="title_activity_statistics_tabbed">Статистика</string>-->
+
 </resources>
