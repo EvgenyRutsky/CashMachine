@@ -46,7 +46,7 @@ public class StatisticsMaker {
                             e.printStackTrace();
                         }
 
-                        if ( (baseDate.after(startDate) || baseDate.equals(startDate)) && baseDate.before(endDate)) {
+                        if ((baseDate.after(startDate) || baseDate.equals(startDate)) && (baseDate.before(endDate) || baseDate.equals(endDate))) {
                             buyers++;
                             totalSaled = totalSaled + Double.parseDouble(childDataSnapshot.child("total").getValue().toString());
                             baseProductsCount = childDataSnapshot.child("product_ids").getValue().toString().split(" ");
