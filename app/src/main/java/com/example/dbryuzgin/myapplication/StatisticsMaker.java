@@ -139,6 +139,7 @@ public class StatisticsMaker {
                         for (DataSnapshot childDataSnapshot : dataSnapshot.getChildren()){
                             Product product = new Product(childDataSnapshot.child("name").getValue().toString(), childDataSnapshot.child("price").getValue().toString(), childDataSnapshot.child("provider_id").getValue().toString(), childDataSnapshot.child("id").getValue().toString());
                             productsViews[finalI].setText(product.getName().toString());
+                            productsCleaner();
                         }
                     }
                 }
@@ -150,4 +151,13 @@ public class StatisticsMaker {
             });
         }
     }
+
+    public static void productsCleaner(){
+        for (int i=0; i < Product.counter; i++ ){
+            Product.productInfos[i] = "";
+        }
+        Product.total = 0;
+        Product.counter = 0;
+    }
+
 }

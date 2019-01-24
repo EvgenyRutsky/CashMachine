@@ -96,37 +96,11 @@ public class Scan extends AppCompatActivity {
         items = BarcodeScan.items;
     }
 
-        public static void decreaseCount (String[]items,final DatabaseReference countRef){
+    public static void decreaseCount (String[]items,final DatabaseReference countRef){
 
-            for (int i = 0; i < Product.counter; i++) {
+        for (int i = 0; i < Product.counter; i++) {
 
-                countRef.orderByChild("product_id").equalTo(items[i]).addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if (dataSnapshot.exists()) {
-
-                            for (DataSnapshot childDataSnapshot : dataSnapshot.getChildren()) {
-                                String key = childDataSnapshot.getKey();
-                                Storage storage = new Storage(childDataSnapshot.child("count").getValue().toString(), childDataSnapshot.child("product_id").getValue().toString());
-                                storageHandlerDecreaser(storage, key, countRef);
-                            }
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-
-                });
-            }
-
-        }
-
-    public static void increaseCount (String item, final DatabaseReference countRef, final String delta){
-
-
-            countRef.orderByChild("product_id").equalTo(item).addListenerForSingleValueEvent(new ValueEventListener() {
+            countRef.orderByChild("product_id").equalTo(items[i]).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     if (dataSnapshot.exists()) {
@@ -134,8 +108,7 @@ public class Scan extends AppCompatActivity {
                         for (DataSnapshot childDataSnapshot : dataSnapshot.getChildren()) {
                             String key = childDataSnapshot.getKey();
                             Storage storage = new Storage(childDataSnapshot.child("count").getValue().toString(), childDataSnapshot.child("product_id").getValue().toString());
-                            storageHandlerIncreaser(storage, key, countRef, delta);
-
+                            storageHandlerDecreaser(storage, key, countRef);
                         }
                     }
                 }
@@ -146,8 +119,30 @@ public class Scan extends AppCompatActivity {
                 }
 
             });
+        }
+    }
 
+    public static void increaseCount (String item, final DatabaseReference countRef, final String delta){
 
+        countRef.orderByChild("product_id").equalTo(item).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+
+                    for (DataSnapshot childDataSnapshot : dataSnapshot.getChildren()) {
+                        String key = childDataSnapshot.getKey();
+                        Storage storage = new Storage(childDataSnapshot.child("count").getValue().toString(), childDataSnapshot.child("product_id").getValue().toString());
+                        storageHandlerIncreaser(storage, key, countRef, delta);
+
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
 
@@ -163,7 +158,4 @@ public class Scan extends AppCompatActivity {
         BarcodeScan.exportProvider = null;
         BarcodeScan.exportProduct = null;
     }
-
-
-
 }
