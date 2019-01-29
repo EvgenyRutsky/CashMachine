@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/border"
-    tools:context=".LowCountProductsActivity">
+    tools:context=".TopSaleActivity">
 
     <TextView
         android:id="@+id/textView"
@@ -14,8 +14,8 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:text="Товары в дефиците"
         android:elevation="8dp"
+        android:text="Популярные товары"
         android:textColor="@color/colorAccent"
         android:textSize="24sp" />
 
@@ -75,29 +75,7 @@
         android:textSize="18sp" />
 
     <TextView
-        android:id="@+id/name6"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="270dp"
-        android:layout_marginEnd="-150dp"
-        android:layout_toStartOf="@+id/textView"
-        android:textSize="18sp" />
-
-    <TextView
-        android:id="@+id/name7"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="310dp"
-        android:layout_marginEnd="-150dp"
-        android:layout_toStartOf="@+id/textView"
-        android:textSize="18sp" />
-
-    <TextView
-        android:id="@+id/count1"
+        android:id="@+id/rate1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/name1"
@@ -106,7 +84,7 @@
         android:textSize="18sp" />
 
     <TextView
-        android:id="@+id/count2"
+        android:id="@+id/rate2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/name1"
@@ -116,7 +94,7 @@
         android:textSize="18sp" />
 
     <TextView
-        android:id="@+id/count3"
+        android:id="@+id/rate3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/name1"
@@ -126,7 +104,7 @@
         android:textSize="18sp" />
 
     <TextView
-        android:id="@+id/count4"
+        android:id="@+id/rate4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/name1"
@@ -136,7 +114,7 @@
         android:textSize="18sp" />
 
     <TextView
-        android:id="@+id/count5"
+        android:id="@+id/rate5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/name1"
@@ -145,23 +123,4 @@
         android:layout_marginEnd="60dp"
         android:textSize="18sp" />
 
-    <TextView
-        android:id="@+id/count6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/name1"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="200dp"
-        android:layout_marginEnd="60dp"
-        android:textSize="18sp" />
-
-    <TextView
-        android:id="@+id/count7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/name1"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="240dp"
-        android:layout_marginEnd="60dp"
-        android:textSize="18sp" />
 </RelativeLayout>

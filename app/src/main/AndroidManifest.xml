@@ -12,38 +12,32 @@
         android:allowBackup="true"
         android:icon="@mipmap/icon_launcher"
         android:label="@string/app_name"
-
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-
         <activity
             android:name=".LoginActivity"
             android:screenOrientation="portrait">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
-
         <activity
             android:name=".RegisterActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/title_activity_register"/>
-
+            android:label="@string/title_activity_register"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".MainActivity"
-            android:screenOrientation="portrait"
             android:label="@string/title_activity_main"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity
             android:name=".Scan"
-            android:screenOrientation="portrait"
-            android:label="@string/title_activity_scan"/>
+            android:label="@string/title_activity_scan"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait" />
 
         <meta-data
             android:name="com.google.android.gms.vision.DEPENDENCIES"
@@ -51,53 +45,54 @@
 
         <activity
             android:name=".Cart"
-            android:screenOrientation="portrait"
-            android:label="@string/title_activity_cart"/>
-
+            android:label="@string/title_activity_cart"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Operations"
-            android:screenOrientation="portrait"
-            android:label="@string/title_activity_operations"/>
-
+            android:label="@string/title_activity_operations"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".successOrder"
-            android:screenOrientation="portrait"
-            android:label="@string/title_activity_success_order"/>
-
+            android:label="@string/title_activity_success_order"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".EmailSender"
-            android:screenOrientation="portrait"
-            android:label="@string/title_activity_email_sender"/>
-
+            android:label="@string/title_activity_email_sender"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ProductAdding"
-            android:screenOrientation="portrait"
-            android:label="@string/title_activity_scan"/>
-
+            android:label="@string/title_activity_scan"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ProductRedactor"
-            android:screenOrientation="portrait"
-            android:label="@string/title_activity_scan"/>
-
+            android:label="@string/title_activity_scan"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Editor"
-            android:screenOrientation="portrait"
-            android:label="@string/title_activity_product_redactor"/>
-
+            android:label="@string/title_activity_product_redactor"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ProductAdder"
-            android:screenOrientation="portrait"
-            android:label="@string/title_activity_product_adding"/>
-
+            android:label="@string/title_activity_product_adding"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".StatisticsTabbed"
-            android:screenOrientation="portrait"
             android:label="@string/title_activity_statistics_tabbed"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity
             android:name=".LowCountProductsActivity"
             android:theme="@style/AppTheme.CustomTheme" />
+        <activity
+            android:name=".TopSaleActivity"
+            android:theme="@style/AppTheme.CustomTheme"/>
+        <activity
+            android:name=".OrderCreation"
+            android:label="@string/title_activity_order_creation"
+            android:parentActivityName=".Operations"
+            android:screenOrientation="portrait" />
 
     </application>
 

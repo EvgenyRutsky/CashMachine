@@ -39,6 +39,7 @@ public class StatisticsTabbed extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
@@ -67,11 +68,12 @@ public class StatisticsTabbed extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()) {
             case R.id.topSaledProducts:
-                Toast.makeText(StatisticsTabbed.this, "Работает", Toast.LENGTH_SHORT).show();
+                Intent intent1 = new Intent(this, TopSaleActivity.class);
+                this.startActivity(intent1);
                 break;
             case R.id.lowCountProducts:
-                Intent intent = new Intent(this, LowCountProductsActivity.class);
-                this.startActivity(intent);
+                Intent intent2 = new Intent(this, LowCountProductsActivity.class);
+                this.startActivity(intent2);
                 break;
             default:
                 return super.onOptionsItemSelected(item);

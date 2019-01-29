@@ -1,5 +1,6 @@
 package com.example.dbryuzgin.myapplication;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -42,7 +43,6 @@ public class Scan extends AppCompatActivity {
     public static DatabaseReference myRef;
 
     Button scan;
-    Button goToMenu;
     Button goToCart;
     CameraView cameraView;
     public static String[] items;
@@ -67,8 +67,9 @@ public class Scan extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scan);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         scan = (Button) findViewById(R.id.scan);
-        goToMenu = (Button) findViewById(R.id.goToMenu);
         goToCart = (Button) findViewById(R.id.goToCart);
         cameraView = (CameraView) findViewById(R.id.cameraView);
 
@@ -82,16 +83,7 @@ public class Scan extends AppCompatActivity {
 
         });
 
-        goToMenu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(Scan.this, MainActivity.class));
-            }
-
-        });
-
-
-        BarcodeScan barcodeScan = new BarcodeScan(cameraView, scan, Scan.this, "Scan");
+        BarcodeScan barcodeScan = new BarcodeScan(cameraView, scan,Scan.this, "Scan");
         barcodeScan.scan();
         items = BarcodeScan.items;
     }
