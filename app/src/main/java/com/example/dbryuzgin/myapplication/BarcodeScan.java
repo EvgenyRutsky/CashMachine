@@ -172,7 +172,7 @@ public class BarcodeScan {
     private void qrParser(String item) {
 
         Product localProduct = new Product(item.split("\n")[0], item.split("\n")[1], item.split("\n")[2], item.split("\n")[3]);
-        Provider localProvider = new Provider(item.split("\n")[2], item.split("\n")[4]);
+        Provider localProvider = new Provider(item.split("\n")[2], item.split("\n")[4], item.split("\n")[5]);
         Storage localStorage = new Storage("0", item.split("\n")[3]);
 
         exportProduct = localProduct;

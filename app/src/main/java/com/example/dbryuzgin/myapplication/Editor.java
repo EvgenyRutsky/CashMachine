@@ -46,7 +46,7 @@ public class Editor extends AppCompatActivity {
                 if(dataSnapshot.exists()){
 
                     for (DataSnapshot childDataSnapshot : dataSnapshot.getChildren()){
-                        Provider providerName = new Provider(childDataSnapshot.child("id").getValue().toString(), childDataSnapshot.child("name").getValue().toString());
+                        Provider providerName = new Provider(childDataSnapshot.child("id").getValue().toString(), childDataSnapshot.child("name").getValue().toString(), childDataSnapshot.child("phone").getValue().toString());
                         provider.setText(providerName.getName());
                     }
 
@@ -97,7 +97,7 @@ public class Editor extends AppCompatActivity {
 
                     for (DataSnapshot childDataSnapshot : dataSnapshot.getChildren()) {
                         String providerKey = childDataSnapshot.getKey();
-                        Provider updatedProvider = new Provider(childDataSnapshot.child("id").getValue().toString(), childDataSnapshot.child("name").getValue().toString());
+                        Provider updatedProvider = new Provider(childDataSnapshot.child("id").getValue().toString(), childDataSnapshot.child("name").getValue().toString(), childDataSnapshot.child("phone").getValue().toString());
                         providerHandler(updatedProvider, providerKey, providerRef);
                     }
                 }

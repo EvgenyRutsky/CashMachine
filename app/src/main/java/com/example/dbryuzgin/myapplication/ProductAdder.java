@@ -54,7 +54,7 @@ public class ProductAdder extends AppCompatActivity {
                 if(dataSnapshot.exists()){
 
                     for (DataSnapshot childDataSnapshot : dataSnapshot.getChildren()){
-                        Provider providerName = new Provider(childDataSnapshot.child("id").getValue().toString(), childDataSnapshot.child("name").getValue().toString());
+                        Provider providerName = new Provider(childDataSnapshot.child("id").getValue().toString(), childDataSnapshot.child("name").getValue().toString(), childDataSnapshot.child("phone").getValue().toString());
                         provider.setText(providerName.getName());
                     }
                 }
@@ -148,7 +148,7 @@ public class ProductAdder extends AppCompatActivity {
 
                     for (DataSnapshot childDataSnapshot : dataSnapshot.getChildren()) {
 
-                        Provider testProvider = new Provider (childDataSnapshot.child("id").getValue().toString(), childDataSnapshot.child("name").getValue().toString());
+                        Provider testProvider = new Provider (childDataSnapshot.child("id").getValue().toString(), childDataSnapshot.child("name").getValue().toString(), childDataSnapshot.child("phone").getValue().toString());
 
                         if(testProvider.getId().equals(BarcodeScan.exportProvider.getId())){
 

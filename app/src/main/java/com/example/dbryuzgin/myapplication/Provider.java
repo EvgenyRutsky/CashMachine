@@ -2,11 +2,12 @@ package com.example.dbryuzgin.myapplication;
 
 public class Provider {
 
-    String id, name;
+    String id, name, phone;
 
-    public Provider(String id, String name) {
+    public Provider(String id, String name, String phone) {
         this.id = id;
         this.name = name;
+        this.phone = phone;
     }
 
     public String getId() {
@@ -17,6 +18,10 @@ public class Provider {
         return name;
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
     public void setId(String id) {
         this.id = id;
     }
@@ -24,4 +29,10 @@ public class Provider {
     public void setName(String name) {
         this.name = name;
     }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+
 }
