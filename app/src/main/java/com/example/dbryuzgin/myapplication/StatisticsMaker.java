@@ -18,7 +18,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 
 public class StatisticsMaker {
 
@@ -72,6 +71,7 @@ public class StatisticsMaker {
             }
         });
     }
+
 
     public static void getLowCountProducts(final TextView[] productsViews, final TextView[] countViews, final AlertDialog.Builder builder){
 
@@ -163,6 +163,7 @@ public class StatisticsMaker {
         Product.counter = 0;
     }
 
+
     public static void getTopSaleProducts (final TextView[] productViews, final TextView[] rateViews, final AlertDialog.Builder builder) throws InterruptedException {
 
         productsRef = FirebaseDatabase.getInstance().getReference().child("Products");
@@ -196,7 +197,6 @@ public class StatisticsMaker {
             }
         });
     }
-
 
     public static void billsFiller(final ArrayList<Product> allProducts, final TextView[] productViews, final TextView[] rateViews, final AlertDialog.Builder builder){
 

@@ -12,7 +12,6 @@ import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 public class StatisticsTabbed extends AppCompatActivity {
 
@@ -51,6 +50,7 @@ public class StatisticsTabbed extends AppCompatActivity {
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
 
+        mViewPager.setOffscreenPageLimit(3);
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
 
@@ -78,6 +78,7 @@ public class StatisticsTabbed extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+        mSectionsPagerAdapter.notifyDataSetChanged();
         return true;
     }
 

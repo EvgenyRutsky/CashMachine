@@ -37,7 +37,7 @@ public class RangeStatistics extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        final View rootView = inflater.inflate(R.layout.range_statistics, container, false);
+        View rootView = inflater.inflate(R.layout.range_statistics, container, false);
 
         date = (TextView)rootView.findViewById(R.id.date);
         startDate = (TextView)rootView.findViewById(R.id.startDate);
