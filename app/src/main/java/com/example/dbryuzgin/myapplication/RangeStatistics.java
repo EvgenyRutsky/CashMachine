@@ -1,7 +1,6 @@
 package com.example.dbryuzgin.myapplication;
 
 import android.app.DatePickerDialog;
-import android.os.Build;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -22,17 +21,11 @@ public class RangeStatistics extends Fragment {
 
     TextView date, buyersCount, productsCount, totalMoney, startDate, endDate;
     Button showResults;
-    Calendar calendar = Calendar.getInstance();
-    String startDateStr, endDateStr;
-    DatePickerDialog datePickerDialog;
     Date currentDate = new Date();
     DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
-    DateFormat dateFormatDay = new SimpleDateFormat("dd");
-    DateFormat dateFormatMonth = new SimpleDateFormat("MM");
-    DateFormat dateFormatYear = new SimpleDateFormat("yyyy");
 
-    private DatePickerDialog.OnDateSetListener mStartDateSetListener;
-    private DatePickerDialog.OnDateSetListener mEndDateSetListener;
+    private int mYearStart, mMonthStart, mDayStart, mYearEnd, mMonthEnd, mDayEnd;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -50,49 +43,65 @@ public class RangeStatistics extends Fragment {
         startDate.setText(dateFormat.format(currentDate));
         endDate.setText(dateFormat.format(currentDate));
 
-        calendar = Calendar.getInstance();
-        calendar.setTime(currentDate);
-        final int day = Integer.parseInt(dateFormatDay.format(calendar.getTime()));
-        final int month = Integer.parseInt(dateFormatMonth.format(calendar.getTime())) - 1;
-        final int year = Integer.parseInt(dateFormatYear.format(calendar.getTime()));
-
         startDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    datePickerDialog = new DatePickerDialog(RangeStatistics.super.getActivity(), mStartDateSetListener, year, month, day);
-                    datePickerDialog.show();
-                }
+                final Calendar c = Calendar.getInstance();
+                mYearStart = c.get(Calendar.YEAR);
+                mMonthStart = c.get(Calendar.MONTH);
+                mDayStart = c.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog dpd = new DatePickerDialog(RangeStatistics.super.getActivity(),
+                        new DatePickerDialog.OnDateSetListener() {
+
+                            @Override
+                            public void onDateSet(DatePicker view, int yearStart, int monthOfYearStart, int dayOfMonthStart) {
+
+                                String startDraft = dayOfMonthStart + "." + (monthOfYearStart + 1) + "." + yearStart;
+                                DateFormat draftDateChanger = new SimpleDateFormat("d.M.yyyy");
+                                try {
+                                    Date newStartDate = draftDateChanger.parse(startDraft);
+                                    startDate.setText(dateFormat.format(newStartDate));
+                                } catch (ParseException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }, mYearStart, mMonthStart, mDayStart);
+                dpd.show();
             }
         });
-
-        mStartDateSetListener = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int startYear, int startMonth, int startDayOfMonth) {
-                startDateStr = startDayOfMonth + "." + dateFormatMonth.format(startMonth + 1) + "." + startYear;
-                startDate.setText(startDateStr);
-            }
-        };
 
         endDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    datePickerDialog = new DatePickerDialog(RangeStatistics.super.getActivity(), mEndDateSetListener, year, month, day);
-                    datePickerDialog.show();
-                }
+                final Calendar cal = Calendar.getInstance();
+                mYearEnd = cal.get(Calendar.YEAR);
+                mMonthEnd = cal.get(Calendar.MONTH);
+                mDayEnd = cal.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog dpd = new DatePickerDialog(RangeStatistics.super.getActivity(),
+                        new DatePickerDialog.OnDateSetListener() {
+
+                            @Override
+                            public void onDateSet(DatePicker view, int yearEnd, int monthOfYearEnd, int dayOfMonthEnd) {
+
+                                String endDraft = dayOfMonthEnd + "." + (monthOfYearEnd + 1) + "." + yearEnd;
+                                DateFormat draftDateChanger = new SimpleDateFormat("d.M.yyyy");
+                                try {
+                                    Date newEndDate = draftDateChanger.parse(endDraft);
+                                    endDate.setText(dateFormat.format(newEndDate));
+                                } catch (ParseException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }, mYearEnd, mMonthEnd, mDayEnd);
+                dpd.show();
             }
         });
 
-        mEndDateSetListener = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int endYear, int endMonth, int endDayOfMonth) {
-                endDateStr = endDayOfMonth + "." + dateFormatMonth.format(endMonth + 1) + "." + endYear;
-                endDate.setText(endDateStr);
-            }
-        };
+
 
         showResults.setOnClickListener(new View.OnClickListener(){
             @Override

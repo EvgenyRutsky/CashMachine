@@ -4,16 +4,19 @@ import android.graphics.Color;
 import android.support.annotation.NonNull;
 
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 
 public class ChartResultsMaker {
@@ -65,14 +68,32 @@ public class ChartResultsMaker {
         chart.setDragEnabled(true);
         chart.setScaleEnabled(true);
 
+        final ArrayList<String> xValues = new ArrayList<>();
         ArrayList<Entry> yValues = new ArrayList<>();
 
         for (int i = 0; i < valuesList.size(); i++){
 
-            yValues.add(new Entry(4 + i,(float)valuesList.get(i).getTotal()));
+            yValues.add(new Entry(i,(float)valuesList.get(i).getTotal()));
         }
 
-        LineDataSet set1 = new LineDataSet(yValues, "Data set 1");
+        for(int i = 0; i < valuesList.size(); i++){
+            xValues.add(valuesList.get(i).getDate().substring(0,2));
+        }
+
+        LineDataSet set1 = new LineDataSet(yValues, "Продажи");
+
+        XAxis xAxis = chart.getXAxis();
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xAxis.setDrawGridLines(false);
+
+
+        xAxis.setValueFormatter(new IAxisValueFormatter() {
+            @Override
+            public String getFormattedValue(float value, AxisBase axis) {
+                int index = (int) value;
+                return xValues.get(index);
+            }
+        });
 
         set1.setFillAlpha(110);
 
@@ -81,7 +102,6 @@ public class ChartResultsMaker {
         set1.setValueTextSize(8f);
         set1.setCircleColor(Color.rgb(216, 27, 96));
 
-        chart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
         chart.getDescription().setEnabled(false);
         chart.getLegend().setEnabled(false);
 
