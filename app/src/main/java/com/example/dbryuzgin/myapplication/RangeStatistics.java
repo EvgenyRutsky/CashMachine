@@ -11,9 +11,15 @@ import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.github.mikephil.charting.charts.LineChart;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -22,6 +28,7 @@ public class RangeStatistics extends Fragment {
     TextView date, buyersCount, productsCount, totalMoney, startDate, endDate;
     Button showResults;
     Date currentDate = new Date();
+    LineChart chart;
     DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
 
     private int mYearStart, mMonthStart, mDayStart, mYearEnd, mMonthEnd, mDayEnd;
@@ -39,6 +46,7 @@ public class RangeStatistics extends Fragment {
         productsCount = (TextView)rootView.findViewById(R.id.productsCount);
         totalMoney = (TextView)rootView.findViewById(R.id.totalMoney);
         showResults = (Button)rootView.findViewById(R.id.showResults);
+        chart = (LineChart)rootView.findViewById(R.id.weekChart);
 
         startDate.setText(dateFormat.format(currentDate));
         endDate.setText(dateFormat.format(currentDate));
@@ -111,6 +119,35 @@ public class RangeStatistics extends Fragment {
                         Toast.makeText(RangeStatistics.super.getActivity(), "Введен неверный диапазон", Toast.LENGTH_SHORT).show();
                     } else {
                         StatisticsMaker.statsMaker(dateFormat.parse(startDate.getText().toString()), dateFormat.parse(endDate.getText().toString()), buyersCount, productsCount, totalMoney);
+
+                        final ArrayList<GraphHandler> valuesList = new ArrayList<>();
+                        DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+                        DateTimeFormatter localDateFormat = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+                        String startDateStr = dateFormat.format(dateFormat.parse(startDate.getText().toString()));
+                        String endDateStr = dateFormat.format(dateFormat.parse(endDate.getText().toString()));
+
+                        LocalDate localStartDate = LocalDate.parse(startDateStr, localDateFormat);
+                        LocalDate localEndDate = LocalDate.parse(endDateStr, localDateFormat);
+
+                        int daysRange = (int) ChronoUnit.DAYS.between(localStartDate, localEndDate);
+
+                        for (int i = 0; i<=daysRange; i++){
+                            LocalDate loopDate = localStartDate.plusDays(i);
+                            GraphHandler graphHandler = new GraphHandler(localDateFormat.format(loopDate), 0);
+                            valuesList.add(graphHandler);
+                        }
+
+                        ChartResultsMaker.chartDataPicker(valuesList, chart, 1);
+
+                        date.setOnClickListener(new View.OnClickListener(){
+                            @Override
+                            public void onClick(View v) {
+
+                                ChartResultsMaker.chartDataPicker(valuesList, chart, 1);
+
+                            }
+
+                        });
                     }
                 } catch (ParseException e) {
                     e.printStackTrace();

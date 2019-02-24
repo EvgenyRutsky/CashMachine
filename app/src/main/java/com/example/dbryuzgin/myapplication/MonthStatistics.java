@@ -68,7 +68,7 @@ public class MonthStatistics extends Fragment {
         date.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                ChartResultsMaker.chartDataPicker(valuesList, chart);
+                ChartResultsMaker.chartDataPicker(valuesList, chart, 0);
             }
 
         });

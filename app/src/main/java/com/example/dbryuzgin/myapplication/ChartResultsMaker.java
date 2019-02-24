@@ -23,7 +23,7 @@ public class ChartResultsMaker {
 
     public static DatabaseReference billsRef;
 
-    public static void chartDataPicker (final ArrayList<GraphHandler> valuesList, LineChart chart){
+    public static void chartDataPicker (final ArrayList<GraphHandler> valuesList, LineChart chart, int detect){
 
         billsRef = FirebaseDatabase.getInstance().getReference().child("Bills");
 
@@ -55,7 +55,7 @@ public class ChartResultsMaker {
 
                 }
             });
-            chartGenarator(valuesList, chart);
+            chartGenarator(valuesList, chart, detect);
         }
     }
 
@@ -63,7 +63,7 @@ public class ChartResultsMaker {
         valuesList.get(index).setTotal(total);
     }
 
-    public static void chartGenarator (ArrayList<GraphHandler> valuesList, LineChart chart){
+    public static void chartGenarator (ArrayList<GraphHandler> valuesList, LineChart chart, int detect){
 
         chart.setDragEnabled(true);
         chart.setScaleEnabled(true);
@@ -76,8 +76,14 @@ public class ChartResultsMaker {
             yValues.add(new Entry(i,(float)valuesList.get(i).getTotal()));
         }
 
-        for(int i = 0; i < valuesList.size(); i++){
-            xValues.add(valuesList.get(i).getDate().substring(0,2));
+        if (detect == 0) {
+            for (int i = 0; i < valuesList.size(); i++) {
+                xValues.add(valuesList.get(i).getDate().substring(0, 2));
+            }
+        } else if (detect == 1){
+            for (int i = 0; i < valuesList.size(); i++) {
+                xValues.add(valuesList.get(i).getDate().substring(0, 5));
+            }
         }
 
         LineDataSet set1 = new LineDataSet(yValues, "Продажи");

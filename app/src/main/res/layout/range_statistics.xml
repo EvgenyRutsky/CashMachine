@@ -105,13 +105,33 @@
         android:textColor="@color/colorPrimary"
         android:textSize="18sp" />
 
+    <TextView
+        android:id="@+id/dynamic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="185dp"
+        android:text="Динамика продаж:"
+        android:textAlignment="center"
+        android:textColor="@color/colorAccent"
+        android:textSize="18sp" />
+
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/weekChart"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_below="@+id/dynamic"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp" />
+
     <Button
         android:id="@+id/showResults"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/weekChart"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="70dp"
+        android:layout_marginTop="10dp"
         android:text="Показать результаты" />
 
     <TextView
