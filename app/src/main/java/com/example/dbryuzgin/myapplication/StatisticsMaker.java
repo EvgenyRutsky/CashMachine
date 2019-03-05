@@ -15,8 +15,6 @@ import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 
 public class StatisticsMaker {
@@ -71,7 +69,6 @@ public class StatisticsMaker {
             }
         });
     }
-
 
     public static void getLowCountProducts(final TextView[] productsViews, final TextView[] countViews, final AlertDialog.Builder builder){
 
@@ -140,8 +137,9 @@ public class StatisticsMaker {
                     if(dataSnapshot.exists()){
 
                         for (DataSnapshot childDataSnapshot : dataSnapshot.getChildren()){
-                            Product product = new Product(childDataSnapshot.child("name").getValue().toString(), childDataSnapshot.child("price").getValue().toString(), childDataSnapshot.child("provider_id").getValue().toString(), childDataSnapshot.child("id").getValue().toString());
-                            productsViews[finalI].setText(product.getName().toString());
+                            Product product = new Product(childDataSnapshot.child("name").getValue().toString(), childDataSnapshot.child("price").getValue().toString(),
+                                    childDataSnapshot.child("provider_id").getValue().toString(), childDataSnapshot.child("id").getValue().toString());
+                            productsViews[finalI].setText(product.getName());
                             productsCleaner();
                         }
                     }
@@ -162,138 +160,4 @@ public class StatisticsMaker {
         Product.total = 0;
         Product.counter = 0;
     }
-
-
-    public static void getTopSaleProducts (final TextView[] productViews, final TextView[] rateViews, final AlertDialog.Builder builder) throws InterruptedException {
-
-        productsRef = FirebaseDatabase.getInstance().getReference().child("Products");
-
-        productsRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                if (dataSnapshot.exists()) {
-
-                    ArrayList<Product> allProducts = new ArrayList<Product>();
-
-                    for (DataSnapshot childDataSnapshot : dataSnapshot.getChildren()) {
-                        Product product = new Product(childDataSnapshot.child("name").getValue().toString(), childDataSnapshot.child("price").getValue().toString(), childDataSnapshot.child("provider_id").getValue().toString(), childDataSnapshot.child("id").getValue().toString());
-//                        try {
-//                            Thread.sleep(5000);
-//                        } catch (InterruptedException e) {
-//                            e.printStackTrace();
-//                        }
-                        allProducts.add(product);
-                    }
-
-                    billsFiller(allProducts, productViews, rateViews, builder);
-                }
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-    }
-
-    public static void billsFiller(final ArrayList<Product> allProducts, final TextView[] productViews, final TextView[] rateViews, final AlertDialog.Builder builder){
-
-        billsRef = FirebaseDatabase.getInstance().getReference().child("Bills");
-
-        billsRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                ArrayList<Bill> allBills = new ArrayList<Bill>();
-
-                if (dataSnapshot.exists()) {
-
-                    for (DataSnapshot childDataSnapshot : dataSnapshot.getChildren()) {
-                        Bill bill = new Bill(" ", " ", " ", " ", childDataSnapshot.child("product_ids").getValue().toString(), " ", " ", " ");
-                        allBills.add(bill);
-                    }
-                }
-
-                getTopSaleProductsHandler(allProducts, allBills, productViews, rateViews, builder);
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-    }
-
-    public static void getTopSaleProductsHandler( ArrayList<Product> allProducts, ArrayList<Bill> allBills, TextView[] productViews, TextView[] rateViews, final AlertDialog.Builder builder) {
-
-        if (allBills.isEmpty()) {
-
-            builder.setTitle("Информация")
-                    .setMessage("В данный момент нет популярных продуктов")
-                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    })
-                    .show();
-
-        } else {
-
-
-            int[] productCounter;
-            productCounter = new int[allProducts.size()];
-
-            for (int i = 0; i < allBills.size(); i++) {
-
-                String[] s1 = allBills.get(i).getProduct_ids().split(" ");
-
-                for (int j = 0; j < s1.length; j++) {
-
-                    productCounter[Integer.parseInt(s1[j]) - 1]++;
-
-                }
-            }
-
-            int[] topRates = productCounter;
-            Arrays.sort(topRates);
-
-            for (int i = 0; i < rateViews.length; i++) {
-
-                rateViews[i].setText(String.valueOf(topRates[i]));
-
-            }
-
-            int[] topProducts = new int[5];
-
-            for (int i = 0; i < productViews.length; i++) {
-                int localMax = searchMax(topProducts);
-                String s1 = String.valueOf(localMax);
-                productViews[i].setText(s1);
-                topProducts[localMax] = 0;
-
-            }
-        }
-    }
-
-    public static int searchMax (int[] topProd){
-
-        int maxI = 0;
-
-        for (int i = 0; i < topProd.length; i++) {
-
-            if (topProd[i] >= topProd[maxI]){
-
-                maxI = topProd[i];
-
-            }
-
-        }
-
-        return maxI;
-
-    }
-
 }

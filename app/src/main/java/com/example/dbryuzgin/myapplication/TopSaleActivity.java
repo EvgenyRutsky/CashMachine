@@ -30,6 +30,7 @@ public class TopSaleActivity extends AppCompatActivity {
                 name4 = (TextView) findViewById(R.id.name4),
                 name5 = (TextView) findViewById(R.id.name5)
         };
+
         TextView[] rates = new TextView[]{
                 rate1 = (TextView) findViewById(R.id.rate1),
                 rate2 = (TextView) findViewById(R.id.rate2),
@@ -40,11 +41,7 @@ public class TopSaleActivity extends AppCompatActivity {
 
         builder = new AlertDialog.Builder(TopSaleActivity.this);
 
-        try {
-            StatisticsMaker.getTopSaleProducts(names, rates, builder);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        StatisticsMakerForTopProducts.getTopSaleProducts(names, rates, builder);
 
     }
 }

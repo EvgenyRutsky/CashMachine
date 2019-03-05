@@ -10,11 +10,6 @@
     android:paddingTop="10dp"
     tools:context=".Cart">
 
-    <!--<ListView-->
-        <!--android:id="@+id/listView"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content" />-->
-
     <Button
         android:id="@+id/goToScan"
         android:layout_width="wrap_content"
@@ -40,65 +35,139 @@
     <TextView
         android:id="@+id/row1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
+        android:layout_marginEnd="60dp"
         android:text=""
         android:textSize="24sp"
         tools:lines="2" />
+
+    <NumberPicker
+        android:id="@+id/numberPicker1"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignTop="@+id/row1"
+        android:layout_marginStart="-59dp"
+        android:layout_toEndOf="@+id/row1"
+        android:elevation="@dimen/fab_margin"
+        android:orientation="horizontal" />
 
     <TextView
         android:id="@+id/row2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/row1"
         android:layout_alignStart="@+id/row1"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="60dp"
         android:text=""
         android:textSize="24sp"
         tools:lines="2" />
+
+    <NumberPicker
+        android:id="@+id/numberPicker2"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignBottom="@+id/row2"
+        android:layout_marginStart="-59dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="0dp"
+        android:layout_toEndOf="@+id/row1"
+        android:elevation="@dimen/fab_margin"
+        android:fadingEdge="horizontal"
+        android:orientation="horizontal"
+        android:theme="@style/AppTheme" />
 
     <TextView
         android:id="@+id/row3"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
+        android:layout_below="@+id/row2"
         android:layout_alignStart="@+id/row1"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="140dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="60dp"
         android:text=""
         android:textSize="24sp"
         tools:lines="2" />
+
+    <NumberPicker
+        android:id="@+id/numberPicker3"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignTop="@+id/row3"
+        android:layout_alignBottom="@+id/row3"
+        android:layout_marginStart="-59dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="0dp"
+        android:layout_toEndOf="@+id/row1"
+        android:elevation="@dimen/fab_margin"
+        android:fadingEdge="horizontal"
+        android:orientation="horizontal"
+        android:theme="@style/AppTheme" />
 
     <TextView
         android:id="@+id/row4"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
+        android:layout_below="@+id/row3"
         android:layout_alignStart="@+id/row1"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="210dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="60dp"
         android:text=""
         android:textSize="24sp"
         tools:lines="2" />
 
+    <NumberPicker
+        android:id="@+id/numberPicker4"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignTop="@+id/row4"
+        android:layout_alignBottom="@+id/row4"
+        android:layout_marginStart="-59dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="0dp"
+        android:layout_toEndOf="@+id/row1"
+        android:elevation="@dimen/fab_margin"
+        android:fadingEdge="horizontal"
+        android:orientation="horizontal"
+        android:theme="@style/AppTheme" />
+
     <TextView
         android:id="@+id/row5"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
+        android:layout_below="@+id/row4"
         android:layout_alignStart="@+id/row1"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="280dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="60dp"
         android:text=""
         android:textSize="24sp"
         tools:lines="2" />
+
+    <NumberPicker
+        android:id="@+id/numberPicker5"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignTop="@+id/row5"
+        android:layout_alignBottom="@+id/row5"
+        android:layout_marginStart="-59dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="0dp"
+        android:layout_toEndOf="@+id/row1"
+        android:elevation="@dimen/fab_margin"
+        android:fadingEdge="horizontal"
+        android:orientation="horizontal"
+        android:theme="@style/AppTheme" />
 
     <TextView
         android:id="@+id/toPay1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/goToScan"
         android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
         android:layout_marginStart="10dp"
-        android:layout_marginBottom="110dp"
+        android:layout_marginBottom="20dp"
         android:text="К оплате: "
         android:textSize="24sp" />
 
@@ -106,10 +175,10 @@
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/pay"
         android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
         android:layout_marginStart="200dp"
-        android:layout_marginBottom="110dp"
+        android:layout_marginBottom="20dp"
         android:paddingRight="50dp"
         android:text="Внесено:"
         android:textSize="24sp" />
@@ -118,9 +187,9 @@
         android:id="@+id/money"
         android:layout_width="57dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_above="@+id/pay"
         android:layout_marginEnd="-130dp"
-        android:layout_marginBottom="105dp"
+        android:layout_marginBottom="14dp"
         android:layout_toStartOf="@+id/pay"
         android:ems="10"
         android:inputType="numberDecimal" />

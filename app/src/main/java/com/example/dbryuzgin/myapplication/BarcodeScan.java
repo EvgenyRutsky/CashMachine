@@ -124,7 +124,8 @@ public class BarcodeScan {
                 if(dataSnapshot.exists()){
 
                     for (DataSnapshot childDataSnapshot : dataSnapshot.getChildren()){
-                        Product product = new Product(childDataSnapshot.child("name").getValue().toString(), childDataSnapshot.child("price").getValue().toString(), childDataSnapshot.child("provider_id").getValue().toString(), childDataSnapshot.child("id").getValue().toString());
+                        Product product = new Product(childDataSnapshot.child("name").getValue().toString(), childDataSnapshot.child("price").getValue().toString(),
+                                childDataSnapshot.child("provider_id").getValue().toString(), childDataSnapshot.child("id").getValue().toString());
 
                         if(activity.equals("Scan")) {
                             addProductToCart(product, item);

@@ -1,11 +1,13 @@
 package com.example.dbryuzgin.myapplication;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,6 +25,8 @@ public class Cart extends AppCompatActivity {
     TextView row1, row2, row3, row4, row5, toPay2;
     Button goToScan, pay;
     EditText money;
+    NumberPicker numberPicker1, numberPicker2, numberPicker3, numberPicker4, numberPicker5;
+    static Dialog d ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +45,22 @@ public class Cart extends AppCompatActivity {
                 row4 = (TextView) findViewById(R.id.row4),
                 row5 = (TextView) findViewById(R.id.row5)
         };
+
+        NumberPicker[] numberPickers = new NumberPicker[]{
+                numberPicker1 = (NumberPicker) findViewById(R.id.numberPicker1),
+                numberPicker2 = (NumberPicker) findViewById(R.id.numberPicker2),
+                numberPicker3 = (NumberPicker) findViewById(R.id.numberPicker3),
+                numberPicker4 = (NumberPicker) findViewById(R.id.numberPicker4),
+                numberPicker5 = (NumberPicker) findViewById(R.id.numberPicker5)
+        };
+
+        for (int i = 0; i < numberPickers.length; i++){
+            numberPickers[i].setMinValue(1);
+            numberPickers[i].setMaxValue(100);
+            numberPickers[i].setWrapSelectorWheel(false);
+            numberPickers[i].setVisibility(View.INVISIBLE);
+            numberPickers[i].setFocusable(false);
+        }
 
         toPay2 = (TextView) findViewById(R.id.toPay2);
 
@@ -62,6 +82,22 @@ public class Cart extends AppCompatActivity {
 
         }
 
+        for (int i = 0; i < numberPickers.length; i++){
+            if (!rows[i].getText().toString().equals("")) {
+                numberPickers[i].setVisibility(View.VISIBLE);
+
+                final int finalI = i;
+                numberPickers[i].setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+                    @Override
+                    public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                        String str = rows[finalI].getText().toString().substring(rows[finalI].getText().toString().length() - 3);
+                        toPay2.setText(String.valueOf(new DecimalFormat("##.##").format(Double.parseDouble(toPay2.getText().toString()) + Double.parseDouble(str)*(newVal - oldVal))));
+                    }
+                });
+
+            }
+        }
+
         pay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -70,7 +106,7 @@ public class Cart extends AppCompatActivity {
                     Toast.makeText(Cart.this, "Нет продуктов к оплате", Toast.LENGTH_SHORT).show();
                 } else {
 
-                    if (money.getText().toString().equals("") || Double.parseDouble(cartTotal) > Double.parseDouble(money.getText().toString())) {
+                    if (money.getText().toString().equals("") || Double.parseDouble(toPay2.getText().toString()) > Double.parseDouble(money.getText().toString())) {
 
                         Toast.makeText(Cart.this, "Введите корректную внесенную сумму", Toast.LENGTH_SHORT).show();
 
