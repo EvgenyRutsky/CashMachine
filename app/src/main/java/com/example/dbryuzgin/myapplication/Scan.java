@@ -88,10 +88,11 @@ public class Scan extends AppCompatActivity {
         items = BarcodeScan.items;
     }
 
-    public static void decreaseCount (String[]items,final DatabaseReference countRef){
+    public static void decreaseCount (String[]items, final DatabaseReference countRef, final String[] deltas){
 
         for (int i = 0; i < Product.counter; i++) {
 
+            final int finalI = i;
             countRef.orderByChild("product_id").equalTo(items[i]).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -100,7 +101,7 @@ public class Scan extends AppCompatActivity {
                         for (DataSnapshot childDataSnapshot : dataSnapshot.getChildren()) {
                             String key = childDataSnapshot.getKey();
                             Storage storage = new Storage(childDataSnapshot.child("count").getValue().toString(), childDataSnapshot.child("product_id").getValue().toString());
-                            storageHandlerDecreaser(storage, key, countRef);
+                            storageHandlerDecreaser(storage, key, countRef, deltas[finalI]);
                         }
                     }
                 }
@@ -138,8 +139,8 @@ public class Scan extends AppCompatActivity {
     }
 
 
-    public static void storageHandlerDecreaser (Storage storage, String key, DatabaseReference countRef){
-        storage.setCount(String.valueOf(Integer.parseInt(storage.getCount()) - 1));
+    public static void storageHandlerDecreaser (Storage storage, String key, DatabaseReference countRef, String delta){
+        storage.setCount(String.valueOf(Integer.parseInt(storage.getCount()) - Integer.parseInt(delta)));
         countRef.child(key).setValue(storage);
     }
 

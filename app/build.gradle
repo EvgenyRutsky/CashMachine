@@ -42,6 +42,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-ml-vision:17.0.0'
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0-alpha'
     implementation 'com.michaelmuenzer.android:ScrollableNumberPicker:0.2.2'
+    implementation 'com.github.pro100svitlo:creditCardNfcReader:1.0.3'
 }
 
 apply plugin: 'com.google.gms.google-services'

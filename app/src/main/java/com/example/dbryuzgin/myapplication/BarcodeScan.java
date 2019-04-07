@@ -160,7 +160,6 @@ public class BarcodeScan {
     }
 
     private void addProductToCart(Product product, String item){
-        idsList += product.getId() + " ";
         Toast.makeText(context, product.getName() + " в корзине", Toast.LENGTH_SHORT).show();
         exportProduct = product;
         items[Product.counter - 1] = item;

@@ -27,7 +27,7 @@ import java.util.Date;
 
 public class successOrder extends AppCompatActivity {
 
-    TextView difference, worker, date, time, orderNumber, toPaySuccess, moneySuccess, number;
+    TextView difference, worker, date, time, orderNumber, toPaySuccess, moneySuccess, number, type;
     Button finishPayment;
     static String cartTotal = new DecimalFormat("#0.00").format(Product.total);
     private FirebaseAuth mAuth;
@@ -49,6 +49,7 @@ public class successOrder extends AppCompatActivity {
         toPaySuccess = (TextView) findViewById(R.id.toPaySuccess);
         moneySuccess = (TextView) findViewById(R.id.moneySuccess);
         number = (TextView) findViewById(R.id.orderNumber);
+        type = (TextView) findViewById(R.id.type);
         finishPayment = (Button) findViewById(R.id.finishPayment);
         final Date currentDate = new Date();
         final DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
@@ -73,8 +74,16 @@ public class successOrder extends AppCompatActivity {
         number.setText("Номер чека: " + billNumber);
 
         toPaySuccess.setText("К оплате: " + new DecimalFormat("#0.00").format(Product.total));
-        moneySuccess.setText("Внесено: " + Cart.enteredMoney);
-        difference.setText("Сдача: " + Cart.difference);
+
+        if (Cart.paymentType.equals("cash")) {
+            moneySuccess.setText("Внесено: " + Cart.enteredMoney);
+            difference.setText("Сдача: " + Cart.difference);
+            type.setText("Оплата произведена наличными");
+        } else if (Cart.paymentType.equals("card")){
+            moneySuccess.setText("Внесено: " + new DecimalFormat("#0.00").format(Product.total));
+            difference.setText("");
+            type.setText("Оплата произведена картой " + CardPaymentActivity.shortCardType + " **** " + CardPaymentActivity.shortCardNumber);
+        }
 
         date.setText("Дата покупки: " + dateFormat.format(currentDate));
         time.setText("Время покупки: " + timeFormat.format(currentDate));
@@ -87,7 +96,8 @@ public class successOrder extends AppCompatActivity {
 
                 captureScreen(numberFormat, currentDate);
 
-                Bill bill = new Bill(dateFormat.format(currentDate), Cart.difference, Cart.enteredMoney, billNumber, BarcodeScan.idsList, timeFormat.format(currentDate), new DecimalFormat("#0.00").format(Product.total), userEmail);
+                Bill bill = new Bill(dateFormat.format(currentDate), Cart.difference, Cart.enteredMoney, billNumber, BarcodeScan.idsList, timeFormat.format(currentDate),
+                        new DecimalFormat("#0.00").format(Product.total), userEmail);
 
                 myRef = FirebaseDatabase.getInstance().getReference();
                 billsRef = myRef.child("Bills");

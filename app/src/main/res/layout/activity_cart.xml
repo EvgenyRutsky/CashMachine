@@ -202,4 +202,18 @@
         android:layout_toEndOf="@+id/toPay1"
         android:textSize="24sp" />
 
+    <Button
+        android:id="@+id/cardPayment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/goToScan"
+        android:layout_alignBottom="@+id/goToScan"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="5dp"
+        android:layout_toStartOf="@+id/pay"
+        android:layout_toEndOf="@+id/goToScan"
+        android:background="@drawable/card_payment_icon" />
+
 </RelativeLayout>

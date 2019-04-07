@@ -22,7 +22,6 @@ public class Product implements Serializable {
         this.price = price;
         productInfos[counter] = "Наименование:  " + name +
                 "\n                   Цена:  " + price;
-        total += Double.parseDouble(price);
         counter++;
     }
 
