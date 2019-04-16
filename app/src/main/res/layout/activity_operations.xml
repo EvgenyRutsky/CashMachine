@@ -81,7 +81,7 @@
             android:textSize="@dimen/fab_margin" />
 
         <Button
-            android:id="@+id/operation4"
+            android:id="@+id/deliveryButton"
             android:layout_width="0dip"
             android:layout_height="match_parent"
             android:layout_centerHorizontal="true"
@@ -91,7 +91,7 @@
             android:layout_marginBottom="15dp"
             android:layout_weight="1"
             android:background="@drawable/operations_button_style"
-            android:text="Операция 4"
+            android:text="Просмотреть доставки"
             android:textColor="@color/common_google_signin_btn_text_dark_default"
             android:textSize="@dimen/fab_margin" />
 

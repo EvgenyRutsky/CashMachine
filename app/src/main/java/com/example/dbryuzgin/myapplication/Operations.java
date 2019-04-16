@@ -12,7 +12,7 @@ import android.widget.Button;
 
 public class Operations extends AppCompatActivity {
 
-    Button addProduct, editProduct, orderCreation;
+    Button addProduct, editProduct, orderCreation, openDelivery;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -25,6 +25,7 @@ public class Operations extends AppCompatActivity {
         addProduct = (Button) findViewById(R.id.addProduct);
         editProduct = (Button) findViewById(R.id.editProduct);
         orderCreation = (Button) findViewById(R.id.orderCreation);
+        openDelivery = findViewById(R.id.deliveryButton);
 
         addProduct.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -46,6 +47,14 @@ public class Operations extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Operations.this, OrderCreation.class));
+            }
+
+        });
+
+        openDelivery.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Operations.this, DeliveryList.class));
             }
 
         });
@@ -89,6 +98,25 @@ public class Operations extends AppCompatActivity {
         });
 
         orderCreation.setOnTouchListener(new View.OnTouchListener() {
+
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN: {
+                        v.getBackground().setColorFilter(Color.rgb(0,85,75),PorterDuff.Mode.SRC_ATOP);
+                        v.invalidate();
+                        break;
+                    }
+                    case MotionEvent.ACTION_UP: {
+                        v.getBackground().clearColorFilter();
+                        v.invalidate();
+                        break;
+                    }
+                }
+                return false;
+            }
+        });
+
+        openDelivery.setOnTouchListener(new View.OnTouchListener() {
 
             public boolean onTouch(View v, MotionEvent event) {
                 switch (event.getAction()) {

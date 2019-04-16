@@ -9,7 +9,9 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.NFC" />
-    <uses-feature android:name="android.hardware.nfc"
+
+    <uses-feature
+        android:name="android.hardware.nfc"
         android:required="true" />
 
     <application
@@ -19,6 +21,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+
         <activity
             android:name=".LoginActivity"
             android:screenOrientation="portrait">
@@ -99,13 +102,15 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".CardPaymentActivity"
-            android:screenOrientation="portrait"
             android:label="payWave"
-            android:parentActivityName=".Cart">
+            android:parentActivityName=".Cart"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.nfc.action.TECH_DISCOVERED" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+
             <meta-data
                 android:name="android.nfc.action.TECH_DISCOVERED"
                 android:resource="@xml/nfc_tech_filter" />
@@ -114,6 +119,18 @@
             android:name=".DeliveryData"
             android:label="Данные для доставки"
             android:parentActivityName=".EmailSender"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".DeliveryDetails"
+            android:label="Детали доставки"
+            android:parentActivityName=".DeliveryList"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".DeliveryList"
+            android:label="Доставка"
+            android:parentActivityName=".Operations"
             android:screenOrientation="portrait" />
     </application>
 
