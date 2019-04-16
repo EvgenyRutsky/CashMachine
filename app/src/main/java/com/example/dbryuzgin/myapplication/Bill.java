@@ -4,12 +4,12 @@ import java.io.Serializable;
 
 public class Bill implements Serializable {
 
-    private String date, difference, money, number, product_ids, time, total, user_email;
+    private String date, difference, money, number, product_ids, time, total, user_email, deliveryState, fio, address, tel;
 
     private Bill(){
     }
 
-    Bill(String Date, String Difference, String Money, String Number, String Product_ids, String Time, String Total, String User_email) {
+    Bill(String Date, String Difference, String Money, String Number, String Product_ids, String Time, String Total, String User_email, String deliveryState, String fio, String address, String tel) {
         this.date = Date;
         this.difference = Difference;
         this.money = Money;
@@ -18,6 +18,13 @@ public class Bill implements Serializable {
         this.time = Time;
         this.total = Total;
         this.user_email = User_email;
+        this.deliveryState = deliveryState;
+        this.fio = fio;
+        this.address = address;
+        this.tel = tel;
+    }
+    public String getDeliveryState () {
+        return deliveryState;
     }
 
     public String getDate() {
@@ -50,5 +57,27 @@ public class Bill implements Serializable {
 
     public String getUser_email() {
         return user_email;
+    }
+
+    public String getFio(){ return fio; }
+
+    public String getAddress(){ return address;}
+
+    public String getTel(){ return tel; }
+
+
+    public void setFio (String fio){
+        this.fio = fio;
+    }
+
+    public  void setAddress (String address){
+        this.address = address;
+    }
+
+    public void setTel (String tel){
+        this.tel = tel;
+    }
+    public void setDeliveryState (String deliveryState){
+        this.deliveryState = deliveryState;
     }
 }

@@ -110,6 +110,11 @@
                 android:name="android.nfc.action.TECH_DISCOVERED"
                 android:resource="@xml/nfc_tech_filter" />
         </activity>
+        <activity
+            android:name=".DeliveryData"
+            android:label="Данные для доставки"
+            android:parentActivityName=".EmailSender"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

@@ -29,12 +29,14 @@ public class successOrder extends AppCompatActivity {
 
     TextView difference, worker, date, time, orderNumber, toPaySuccess, moneySuccess, number, type;
     Button finishPayment;
+    Button orderDelivery;
     static String cartTotal = new DecimalFormat("#0.00").format(Product.total);
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private DatabaseReference myRef, billsRef;
     public static String billNumber;
     private String userEmail = "";
+    public static Bill tempBill;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +53,7 @@ public class successOrder extends AppCompatActivity {
         number = (TextView) findViewById(R.id.orderNumber);
         type = (TextView) findViewById(R.id.type);
         finishPayment = (Button) findViewById(R.id.finishPayment);
+        orderDelivery = (Button) findViewById(R.id.delivery);
         final Date currentDate = new Date();
         final DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
         final DateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
@@ -97,7 +100,7 @@ public class successOrder extends AppCompatActivity {
                 captureScreen(numberFormat, currentDate);
 
                 Bill bill = new Bill(dateFormat.format(currentDate), Cart.difference, Cart.enteredMoney, billNumber, BarcodeScan.idsList, timeFormat.format(currentDate),
-                        new DecimalFormat("#0.00").format(Product.total), userEmail);
+                        new DecimalFormat("#0.00").format(Product.total), userEmail, "0","", "", "");
 
                 myRef = FirebaseDatabase.getInstance().getReference();
                 billsRef = myRef.child("Bills");
@@ -111,7 +114,29 @@ public class successOrder extends AppCompatActivity {
             }
         });
 
-        ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},00);
+        orderDelivery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                //captureScreen(numberFormat, currentDate); скриншот чека - пересмотреть потом
+
+                 tempBill = new Bill(dateFormat.format(currentDate), Cart.difference, Cart.enteredMoney, billNumber, BarcodeScan.idsList, timeFormat.format(currentDate),
+                        new DecimalFormat("#0.00").format(Product.total), userEmail, "0", "", "", "");
+
+//                myRef = FirebaseDatabase.getInstance().getReference();
+//                billsRef = myRef.child("Bills");
+//                billsRef.push().setValue(tempBill);
+
+                BarcodeScan.idsList = "";
+
+                Intent intent = new Intent(successOrder.this, DeliveryData.class);
+                startActivity(intent);
+
+            }
+        });
+
+
+        //ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},00);
 
     }
 

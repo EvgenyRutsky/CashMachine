@@ -40,8 +40,8 @@ public class ChartResultsMaker {
 
                         for (DataSnapshot childDataSnapshot : dataSnapshot.getChildren()) {
 
-                            Bill bill = new Bill(childDataSnapshot.child("date").getValue().toString(), "", "",
-                                    "", "", "", childDataSnapshot.child("total").getValue().toString(), "");
+                            Bill bill = new Bill(childDataSnapshot.child("date").getValue().toString(), " ", " ",
+                                    " ", " ", " ", childDataSnapshot.child("total").getValue().toString(), " ", "0", " ", " ", " ");
                             total = total + Double.parseDouble(bill.getTotal());
                         }
                         handler(valuesList, finalI, total);
@@ -55,7 +55,7 @@ public class ChartResultsMaker {
 
                 }
             });
-            chartGenarator(valuesList, chart, detect);
+            chartGenerator(valuesList, chart, detect);
         }
     }
 
@@ -63,7 +63,7 @@ public class ChartResultsMaker {
         valuesList.get(index).setTotal(total);
     }
 
-    public static void chartGenarator (ArrayList<GraphHandler> valuesList, LineChart chart, int detect){
+    public static void chartGenerator (ArrayList<GraphHandler> valuesList, LineChart chart, int detect){
 
         chart.setDragEnabled(true);
         chart.setScaleEnabled(true);

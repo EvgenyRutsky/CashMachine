@@ -46,7 +46,7 @@ public class StatisticsMakerForTopProducts {
                 if (dataSnapshot.exists()) {
 
                     for (DataSnapshot childDataSnapshot : dataSnapshot.getChildren()) {
-                        Bill bill = new Bill(" ", " ", " ", " ", childDataSnapshot.child("product_ids").getValue().toString(), " ", " ", " ");
+                        Bill bill = new Bill(" ", " ", " ", " ", childDataSnapshot.child("product_ids").getValue().toString(), " ", " ", " ", " ", " ", " ", " ");
                         allBills = allBills + bill.getProduct_ids();
                     }
                 }
