@@ -6,14 +6,17 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.app.Activity;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import java.text.DecimalFormat;
+import com.yandex.mapkit.Animation;
+import com.yandex.mapkit.MapKitFactory;
+import com.yandex.mapkit.geometry.Point;
+import com.yandex.mapkit.map.CameraPosition;
+import com.yandex.mapkit.mapview.MapView;
 
 import static com.example.dbryuzgin.myapplication.successOrder.billNumber;
-// import com.google.android.gms.maps.GoogleMap;
 
 
 public class DeliveryData extends AppCompatActivity /*implements OnMapReadyCallback*/ {
@@ -22,12 +25,20 @@ public class DeliveryData extends AppCompatActivity /*implements OnMapReadyCallb
     Button proceed;
     Bill bill = successOrder.tempBill;
     private DatabaseReference myRef;
-//    GoogleMap googleMap;
+    private MapView mapView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+
+        MapKitFactory.setApiKey("6b28ce94-1e9d-47a4-b7b2-6c3bdba65f5a");
+        MapKitFactory.initialize(this);
+
         setContentView(R.layout.activity_delivery_data);
+
+        super.onCreate(savedInstanceState);
+
+        mapView = (MapView)findViewById(R.id.mapview);
 
         orderNumber = findViewById(R.id.orderNumber);
         clientName = findViewById(R.id.clientName);
@@ -36,6 +47,11 @@ public class DeliveryData extends AppCompatActivity /*implements OnMapReadyCallb
         proceed = findViewById(R.id.proceed);
 
         orderNumber.setText(billNumber);
+
+        mapView.getMap().move(
+                new CameraPosition(new Point(53.898506, 30.333742), 11.0f, 0.0f, 0.0f),
+                new Animation(Animation.Type.SMOOTH, 0),
+                null);
 
         proceed.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,18 +74,24 @@ public class DeliveryData extends AppCompatActivity /*implements OnMapReadyCallb
             }
         });
 
+    }
 
-//        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-//                .findFragmentById(R.id.mapView);
-//        if (mapFragment != null) {
-//            mapFragment.getMapAsync(this);
-//        }
+    @Override
+    protected void onStop() {
+        // Вызов onStop нужно передавать инстансам MapView и MapKit.
+        mapView.onStop();
+        MapKitFactory.getInstance().onStop();
+        super.onStop();
+    }
+
+    @Override
+    protected void onStart() {
+        // Вызов onStart нужно передавать инстансам MapView и MapKit.
+        super.onStart();
+        MapKitFactory.getInstance().onStart();
+        mapView.onStart();
     }
 
 
 
-//    @Override
-//    public void onMapReady(GoogleMap googleMap) {
-//        this.googleMap = googleMap;
-//    }
 }
